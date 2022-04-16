@@ -74,6 +74,8 @@ export async function checkPromoCode(requestData) {
   let promoData=null;
   if(data.errorCode === 0){
     promoData = data.promoData;
+  }else{
+    throw new Error(data.message || 'Could not get class-packs.');
   }
 
   return promoData;

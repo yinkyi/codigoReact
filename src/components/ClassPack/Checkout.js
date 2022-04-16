@@ -63,7 +63,10 @@ const Checkout = () =>{
     useEffect(()=>{
         calInitialAmount();
     },[]);
-    
+    let promo_error = '';
+    if(error){
+        promo_error = <p className="text-red-500">Promo code does not match!</p>
+    }
     if(status==="completed" && promoData && done===0){
         const discounted_price = selected_pack.pack_price * promoData.discount / 100;
         const subtotal_amount = selected_pack.pack_price - discounted_price;
@@ -111,14 +114,15 @@ const Checkout = () =>{
                         </div>
                         {!orderFinish && 
                             <div className="grid md:grid-cols-2 md:gap-2 mt-2">
-                            <div className="form-control">
-                                 <div className="flex flex-wrap items-stretch w-full mb-4 relative">
-                                     <input type="text" className="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border h-10 border-grey-light rounded rounded-r-none px-3 relative" placeholder="Promo Code"  ref={promoRefInput}/>
-                                     <div className="flex -mr-px">
-                                         <button type="button" onClick={promoCheckHandler} className="bg-cyan-500 text-white text-sm px-6">Apply</button>
-                                     </div>	
-                                 </div>	
-                             </div>
+                                <div className="form-control">
+                                    <div className="flex flex-wrap items-stretch w-full mb-4 relative">
+                                        <input type="text" className="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border h-10 border-grey-light rounded rounded-r-none px-3 relative" placeholder="Promo Code"  ref={promoRefInput}/>
+                                        <div className="flex -mr-px">
+                                            <button type="button" onClick={promoCheckHandler} className="bg-cyan-500 text-white text-sm px-6">Apply</button>
+                                        </div>	
+                                    </div>	
+                                    {promo_error}
+                                </div>
                             </div> 
                         }
                         
