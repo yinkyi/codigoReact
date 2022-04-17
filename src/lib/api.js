@@ -16,7 +16,7 @@ export async function authLogin(requestData) {
   if (!response.ok) {
     throw new Error(data.message || 'Login Fail!!.');
   }
-
+ 
   return data;
 }
 export async function sendOrder(requestData) {
@@ -69,7 +69,7 @@ export async function checkPromoCode(requestData) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || 'Could not get class-packs.');
+    throw new Error(data.message || 'promoCode Error.');
   }
   let promoData=null;
   if(data.errorCode === 0){

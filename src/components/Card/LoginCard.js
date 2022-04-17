@@ -7,6 +7,7 @@ import { authActions } from '../../store/auth';
 import { authLogin } from '../../lib/api';
 const LoginCard = (props) => {
   const history = useHistory();
+
   const dispatch = useDispatch();
   const {sendRequest,data,error,status} = useHttp(authLogin);
   const emailInputRef = useRef('');
@@ -30,7 +31,11 @@ const LoginCard = (props) => {
       expiredTime:data.expires_at
     })); 
     props.onHideCard();
-    history.replace('/class-packs');
+    let currentPath = '/class-packs';
+    history.replace(currentPath);
+    setTimeout(() => {
+        history.go(currentPath)
+    }, 0)
 
   }
   let modelContent = <React.Fragment>    
