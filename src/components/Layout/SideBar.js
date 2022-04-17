@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-const SideBar = () => {  
+const SideBar = (props) => {  
  
   const burgerClickHandler = ()=>{
     const menu = document.querySelector("#menu");
@@ -40,15 +40,16 @@ const SideBar = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </Link>
-                </li>     
-                <li className="py-1">
+                </li>
+                {props.isAuth && <li className="py-1">
                     <Link to='/class-packs' className="px-4 flex justify-end border-r-4 border-white">
                         <span>Class Packs</span>
                         <svg className="w-6 h-6 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </Link>
-                </li>            
+                </li>  }     
+                          
             </ul>
         </nav>
     </div>
