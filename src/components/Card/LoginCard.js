@@ -1,14 +1,9 @@
 import Modal from '../UI/Modal';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import useHttp from '../../hooks/use-http';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { authActions } from '../../store/auth';
 import { authLogin } from '../../lib/api';
 const LoginCard = (props) => {
-  const history = useHistory();
-
-  const dispatch = useDispatch();
+  console.log("Logincard",props);
   const {sendRequest,data,error,status} = useHttp(authLogin);
   const emailInputRef = useRef('');
   const passwordInputRef = useRef('');
@@ -19,25 +14,16 @@ const LoginCard = (props) => {
     const password = passwordInputRef.current.value;
     sendRequest({
           email,
-          password,
-          returnSecureToken:true
+          password
     })
    
   }
+  useEffect(()=>{
+    if(status === "completed" && !error){  
+      props.onSuccessLogin(data);
+    }
+  },[status,error,data,props])
   
-  if(status === "completed" && !error){
-     dispatch(authActions.login({
-      token:data.access_token,
-      expiredTime:data.expires_at
-    })); 
-    props.onHideCard();
-    let currentPath = '/class-packs';
-    history.replace(currentPath);
-    setTimeout(() => {
-        history.go(currentPath)
-    }, 0)
-
-  }
   let modelContent = <React.Fragment>    
        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
          <div className="text-center font-bold mb-10">
@@ -78,4 +64,4 @@ const LoginCard = (props) => {
     </Modal>
   )
 }
-export default LoginCard
+export default React.memo(LoginCard)

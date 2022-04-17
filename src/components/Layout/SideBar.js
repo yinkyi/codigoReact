@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-
+import React from 'react';
 const SideBar = (props) => {  
- 
+    console.log("Sidebar");
   const burgerClickHandler = ()=>{
     const menu = document.querySelector("#menu");
     if(menu.classList.contains('hidden')){
@@ -56,4 +56,4 @@ const SideBar = (props) => {
   );
 };
 
-export default SideBar;
+export default React.memo(SideBar);

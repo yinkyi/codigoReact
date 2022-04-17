@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Fragment} from 'react';
 import React from 'react';
 const Header = (props) => {  
-
+  console.log("Header",props.isAuth);
   const history = useHistory();
   const dispatch = useDispatch();
 
